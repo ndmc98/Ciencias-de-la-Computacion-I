@@ -51,18 +51,22 @@ int main(int argc, char** argv) {
 	*/
 
 	//insertar al inicio de la lista 
-	cout<<"Tamaño lista : "<<lent.tam_lista()<<endl;
 	lent.insertar_inicio(nuevo);
-	cout<<"Tamaño lista : "<<lent.tam_lista()<<endl;
 	lent.insertar_final(nuevo1);
-	cout<<"Tamaño lista : "<<lent.tam_lista()<<endl;
 	lent.insertar_final(nuevo2);
-	cout<<"Tamaño lista : "<<lent.tam_lista()<<endl;
 	lent.insertar_pos(nuevo3,2);
 
 	cout<<"Tamaño lista : "<<lent.tam_lista()<<endl;
 
-	for (int i=1; i<=4; i++){
+	for (int i=1; i<=lent.tam_lista(); i++){
 		cout<<lent.consultar(i)<<endl;
 	}
+
+	lent.eliminar_inicio();
+
+	cout<<"Tamaño lista : "<<lent.tam_lista()<<endl;
+	
+		for (int i=1; i<=lent.tam_lista(); i++){
+			cout<<lent.consultar(i)<<endl;
+		}
 }

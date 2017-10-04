@@ -79,6 +79,18 @@ void listad <T>::insertar_pos(nodo<T> *info,int pos){
 	}
 }
 template <class T>
+T listad <T>::eliminar_inicio(){
+	nodo<T> *aux;
+	T aux0;
+	aux = cabeza;
+	cabeza = cabeza -> sig;
+	cabeza -> ant = aux -> ant;
+	aux0 = aux -> dato;
+	delete aux;
+	tam--;
+	return aux0;
+}
+template <class T>
 T listad <T>::consultar(int pos){
 	int i=1;
 	nodo<T> *aux,*aux2;
