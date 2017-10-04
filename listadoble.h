@@ -91,6 +91,19 @@ T listad <T>::eliminar_inicio(){
 	return aux0;
 }
 template <class T>
+T listad <T>::eliminar_final(){
+	nodo<T> *aux,*aux2;
+	T aux0;
+	aux = cabeza -> ant;
+	aux2 = aux -> ant;
+	cabeza -> ant = aux2;
+	aux2 ->sig = cabeza;
+	aux0 = aux -> dato;
+	delete aux;
+	tam--;
+	return aux0;
+}
+template <class T>
 T listad <T>::consultar(int pos){
 	int i=1;
 	nodo<T> *aux,*aux2;

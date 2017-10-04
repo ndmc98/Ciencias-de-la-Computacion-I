@@ -62,7 +62,7 @@ int main(int argc, char** argv) {
 		cout<<lent.consultar(i)<<endl;
 	}
 
-	lent.eliminar_inicio();
+	lent.eliminar_final();
 
 	cout<<"Tamaño lista : "<<lent.tam_lista()<<endl;
 	
