@@ -77,5 +77,13 @@ int main(int argc, char** argv) {
 		cout<<lent.consultar(i)<<endl;
 	}
 	
+	lent.eliminar_final();
+	
+	cout<<"Tamaño lista : "<<lent.tam_lista()<<endl;
+	
+	for (int i = 1; i <= lent.tam_lista(); i++){
+		cout<<lent.consultar(i)<<endl;
+	}
+	
 	cout<<" ¿Lista vacia? "<<lent.lista_vacia()<<endl;
 }
