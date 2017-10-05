@@ -6,22 +6,22 @@ using namespace std;
 template <class T>
 struct nodo{
 	T dato;
-	nodo<T> *sig;
-	nodo<T> *ant;
+	nodo<T> *sig, *ant;
 };
 
 template <class T>
 class listad{
 	nodo<T> *cabeza;
-	int tam=1;
+	int tam = 1;
 
 	public:
 		listad(){
 			cabeza = NULL;
 		};
+		
 	void insertar_inicio(nodo<T> *info);
 	void insertar_final(nodo<T> *info);
-	void insertar_pos(nodo<T> *info,int pos);
+	void insertar_pos(nodo<T> *info, int pos);
 
 	T consultar(int pos);
 	T eliminar_inicio();
@@ -29,6 +29,7 @@ class listad{
 	T eliminar_pos(int pos);
 
 	int tam_lista();
+	bool lista_vacia();
 };
 
 template <class T>
@@ -44,11 +45,14 @@ void listad <T>::insertar_inicio(nodo<T> *info){
 		tam++;
 	}
 }
+
 template <class T>
 void listad <T>::insertar_final(nodo<T> *info){
 	nodo<T> *aux;
-	if(cabeza==NULL){
+	if(cabeza == NULL){
 		cabeza = info;
+		cabeza -> sig = NULL;
+		cabeza -> ant = cabeza;
 	} else {
 		aux = cabeza -> ant;
 		aux -> sig = info;
@@ -57,6 +61,7 @@ void listad <T>::insertar_final(nodo<T> *info){
 		tam++;
 	}
 }
+
 template <class T>
 void listad <T>::insertar_pos(nodo<T> *info,int pos){
 	if(pos > tam){
@@ -64,12 +69,12 @@ void listad <T>::insertar_pos(nodo<T> *info,int pos){
 	} else if(pos <= 1){
 		insertar_inicio(info);
 	} else {
-		nodo<T> *aux,*aux2;
+		nodo<T> *aux, *aux2;
 		aux = cabeza;
 		for(int i = 1; i < pos; i++){
 			aux = aux -> sig;
 		}
-		cout << "dato : " << aux -> dato;
+		cout << "dato : " << aux -> dato <<endl;
 		aux2 = aux -> ant;
 		info -> ant = aux2;
 		aux -> ant = info;
@@ -78,6 +83,7 @@ void listad <T>::insertar_pos(nodo<T> *info,int pos){
 		tam++;
 	}
 }
+
 template <class T>
 T listad <T>::eliminar_inicio(){
 	nodo<T> *aux;
@@ -90,23 +96,11 @@ T listad <T>::eliminar_inicio(){
 	tam--;
 	return aux0;
 }
-template <class T>
-T listad <T>::eliminar_final(){
-	nodo<T> *aux,*aux2;
-	T aux0;
-	aux = cabeza -> ant;
-	aux2 = aux -> ant;
-	cabeza -> ant = aux2;
-	aux2 ->sig = cabeza;
-	aux0 = aux -> dato;
-	delete aux;
-	tam--;
-	return aux0;
-}
+
 template <class T>
 T listad <T>::consultar(int pos){
-	int i=1;
-	nodo<T> *aux,*aux2;
+	int i = 1;
+	nodo<T> *aux, *aux2;
 	aux = cabeza;
 	while (aux != NULL && i < pos){
 		aux = aux -> sig;
@@ -116,8 +110,19 @@ T listad <T>::consultar(int pos){
 		return aux -> dato;
 	}
 }
+
 template <class T>
 int listad <T>::tam_lista(){
 	return tam;
 }
+
+template <class T>
+bool listad <T>::lista_vacia(){
+	if(tam == 0){
+		return true;
+	} else {
+		return false;
+	}
+}
+
 #endif
