@@ -74,7 +74,7 @@ void listad <T>::insertar_pos(nodo<T> *info,int pos){
 		for(int i = 1; i < pos; i++){
 			aux = aux -> sig;
 		}
-		cout << "dato : " << aux -> dato <<endl;
+		//cout << "dato : " << aux -> dato <<endl;
 		aux2 = aux -> ant;
 		info -> ant = aux2;
 		aux -> ant = info;
@@ -96,7 +96,19 @@ T listad <T>::eliminar_inicio(){
 	tam--;
 	return aux0;
 }
-
+template <class T>
+T listad <T>::eliminar_final(){
+	nodo<T> *aux,*aux2;
+	T aux0;
+	aux = cabeza -> ant;
+	aux2 = aux -> ant;
+	cabeza -> ant = aux2;
+	aux2 ->sig = cabeza;
+	aux0 = aux -> dato;
+	delete aux;
+	tam--;
+	return aux0;
+}
 template <class T>
 T listad <T>::consultar(int pos){
 	int i = 1;
