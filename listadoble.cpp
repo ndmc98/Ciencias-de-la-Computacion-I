@@ -1,4 +1,4 @@
-#include <iostream>	
+#include <iostream>
 #include "listadoble.h"
 
 using namespace std;
@@ -7,7 +7,7 @@ int main(int argc, char** argv) {
 	listad<int> lent;
 	//Lista<char> lchar;
 
-	nodo<int> *nuevo, *nuevo1, *nuevo2, *nuevo3;
+	nodo<int> *nuevo, *nuevo1, *nuevo2, *nuevo3, *nuevo4;
 	//nodo<char> *nchar, *nchar1, *nchar2, *nchar3, *nchar4;
 	
 	//Creo nuevos nodos para ser ingresados en la lista
@@ -30,6 +30,11 @@ int main(int argc, char** argv) {
 	nuevo3 -> dato = 12;
 	nuevo3 -> sig = NULL;
 	nuevo3 -> ant = NULL;
+	
+	nuevo4 = new nodo<int>;
+	nuevo4 -> dato = 1;
+	nuevo4 -> sig = NULL;
+	nuevo4 -> ant = NULL;
 	/*
 	nchar = new nodo<char>;
 	nchar -> dato = '*';
@@ -62,12 +67,25 @@ int main(int argc, char** argv) {
 	lent.insertar_final(nuevo1);
 	lent.insertar_final(nuevo2);
 	lent.insertar_pos(nuevo3, 2);
-
+	lent.insertar_inicio(nuevo4);
+	
 	cout<<"Tamaño lista : "<<lent.tam_lista()<<endl;
 
 	for (int i = 1; i <= lent.tam_lista(); i++){
 		cout<<lent.consultar(i)<<endl;
 	}
+	
+	cout<<" ¿Lista vacia? "<<lent.lista_vacia()<<endl;
+	
+	lent.eliminar_pos(3);
+	
+	cout<<"Tamaño lista : "<<lent.tam_lista()<<endl;
+	
+	for (int i = 1; i <= lent.tam_lista(); i++){
+		cout<<lent.consultar(i)<<endl;
+	}
+	
+	cout<<" ¿Lista vacia? "<<lent.lista_vacia()<<endl;
 
 	lent.eliminar_inicio();
 
@@ -77,7 +95,19 @@ int main(int argc, char** argv) {
 		cout<<lent.consultar(i)<<endl;
 	}
 	
+	cout<<" ¿Lista vacia? "<<lent.lista_vacia()<<endl;
+	
 	lent.eliminar_final();
+	
+	cout<<"Tamaño lista : "<<lent.tam_lista()<<endl;
+	
+	for (int i = 1; i <= lent.tam_lista(); i++){
+		cout<<lent.consultar(i)<<endl;
+	}
+	
+	cout<<" ¿Lista vacia? "<<lent.lista_vacia()<<endl;
+	
+	lent.eliminar_pos(2);
 	
 	cout<<"Tamaño lista : "<<lent.tam_lista()<<endl;
 	

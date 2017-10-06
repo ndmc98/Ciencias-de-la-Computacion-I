@@ -23,10 +23,11 @@ class listad{
 	void insertar_final(nodo<T> *info);
 	void insertar_pos(nodo<T> *info, int pos);
 
-	T consultar(int pos);
 	T eliminar_inicio();
 	T eliminar_final();
 	T eliminar_pos(int pos);
+	
+	T consultar(int pos);
 
 	int tam_lista();
 	bool lista_vacia();
@@ -36,7 +37,7 @@ template <class T>
 void listad <T>::insertar_inicio(nodo<T> *info){
 	if(cabeza == NULL){
 		cabeza = info;
-		cabeza -> sig = NULL;
+		cabeza -> sig = cabeza;
 		cabeza -> ant = cabeza;
 	} else {
 		info -> sig = cabeza;
@@ -48,38 +49,34 @@ void listad <T>::insertar_inicio(nodo<T> *info){
 
 template <class T>
 void listad <T>::insertar_final(nodo<T> *info){
-	nodo<T> *aux;
 	if(cabeza == NULL){
 		cabeza = info;
-		cabeza -> sig = NULL;
+		cabeza -> sig = cabeza;
 		cabeza -> ant = cabeza;
 	} else {
-		aux = cabeza -> ant;
-		aux -> sig = info;
-		info -> ant = aux;
+		cabeza -> ant -> sig = info;
+		info -> ant = cabeza -> ant;
 		cabeza -> ant = info;
 		tam++;
 	}
 }
 
 template <class T>
-void listad <T>::insertar_pos(nodo<T> *info,int pos){
+void listad <T>::insertar_pos(nodo<T> *info, int pos){
 	if(pos > tam){
 		insertar_final(info);
 	} else if(pos <= 1){
 		insertar_inicio(info);
 	} else {
-		nodo<T> *aux, *aux2;
+		nodo<T> *aux;
 		aux = cabeza;
 		for(int i = 1; i < pos; i++){
 			aux = aux -> sig;
 		}
-		//cout << "dato : " << aux -> dato <<endl;
-		aux2 = aux -> ant;
-		info -> ant = aux2;
+		info -> ant = aux -> ant;
+		aux -> ant -> sig = info;
 		aux -> ant = info;
 		info -> sig = aux;
-		aux2 -> sig = info;
 		tam++;
 	}
 }
@@ -99,22 +96,43 @@ T listad <T>::eliminar_inicio(){
 
 template <class T>
 T listad <T>::eliminar_final(){
-	nodo<T> *aux, *aux2;
+	nodo<T> *aux;
 	T aux0;
 	aux = cabeza -> ant;
-	aux2 = aux -> ant;
-	cabeza -> ant = aux2;
-	aux2 -> sig = cabeza;
 	aux0 = aux -> dato;
+	cabeza -> ant = cabeza -> ant -> ant;
+	cabeza -> ant -> sig = cabeza;
 	delete aux;
 	tam--;
 	return aux0;
 }
 
 template <class T>
+T listad <T>::eliminar_pos(int pos){
+	nodo<T> *aux;
+	aux = cabeza;
+	T aux0;
+	if (pos <= 1){
+		eliminar_inicio();
+	} else if (pos > tam){
+		eliminar_final();
+	} else {
+		for(int i = 1; i < pos; i++){
+			aux = aux -> sig;
+		}
+		aux -> ant -> sig = aux -> sig;
+		aux -> sig -> ant = aux -> ant;
+		aux0 = aux -> dato;
+		delete aux;
+		tam--;
+		return aux0;
+	}
+}
+
+template <class T>
 T listad <T>::consultar(int pos){
 	int i = 1;
-	nodo<T> *aux, *aux2;
+	nodo<T> *aux;
 	aux = cabeza;
 	while (aux != NULL && i < pos){
 		aux = aux -> sig;
