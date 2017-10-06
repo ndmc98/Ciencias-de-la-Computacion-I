@@ -19,9 +19,9 @@ class listad{
 			cabeza = NULL;
 		};
 		
-	void insertar_inicio(nodo<T> *info);
-	void insertar_final(nodo<T> *info);
-	void insertar_pos(nodo<T> *info, int pos);
+	void insertar_inicio(T info);
+	void insertar_final(T info);
+	void insertar_pos(T info, int pos);
 
 	T eliminar_inicio();
 	T eliminar_final();
@@ -34,36 +34,45 @@ class listad{
 };
 
 template <class T>
-void listad <T>::insertar_inicio(nodo<T> *info){
+void listad <T>::insertar_inicio(T info){
+	nodo<T> *nuevo = new nodo<T>;
+	nuevo -> dato = info;
+	
 	if(cabeza == NULL){
-		cabeza = info;
+		cabeza = nuevo;
 		cabeza -> sig = cabeza;
 		cabeza -> ant = cabeza;
 	} else {
-		info -> sig = cabeza;
-		info -> ant = cabeza -> ant;
-		cabeza = info;
+		nuevo -> sig = cabeza;
+		nuevo -> ant = cabeza -> ant;
+		cabeza = nuevo;
 		tam++;
 	}
 }
 
 template <class T>
-void listad <T>::insertar_final(nodo<T> *info){
+void listad <T>::insertar_final(T info){
+	nodo<T> *nuevo = new nodo<T>;
+	nuevo -> dato = info;
+	
 	if(cabeza == NULL){
-		cabeza = info;
+		cabeza = nuevo;
 		cabeza -> sig = cabeza;
 		cabeza -> ant = cabeza;
 	} else {
-		cabeza -> ant -> sig = info;
-		info -> ant = cabeza -> ant;
-		cabeza -> ant = info;
+		cabeza -> ant -> sig = nuevo;
+		nuevo -> ant = cabeza -> ant;
+		cabeza -> ant = nuevo;
 		tam++;
 	}
 }
 
 template <class T>
-void listad <T>::insertar_pos(nodo<T> *info, int pos){
-	if(pos > tam){
+void listad <T>::insertar_pos(T info, int pos){
+	nodo<T> *nuevo = new nodo<T>;
+	nuevo -> dato = info;
+	
+	if(pos >= tam){
 		insertar_final(info);
 	} else if(pos <= 1){
 		insertar_inicio(info);
@@ -73,10 +82,10 @@ void listad <T>::insertar_pos(nodo<T> *info, int pos){
 		for(int i = 1; i < pos; i++){
 			aux = aux -> sig;
 		}
-		info -> ant = aux -> ant;
-		aux -> ant -> sig = info;
-		aux -> ant = info;
-		info -> sig = aux;
+		nuevo -> ant = aux -> ant;
+		aux -> ant -> sig = nuevo;
+		aux -> ant = nuevo;
+		nuevo -> sig = aux;
 		tam++;
 	}
 }
@@ -114,7 +123,7 @@ T listad <T>::eliminar_pos(int pos){
 	T aux0;
 	if (pos <= 1){
 		eliminar_inicio();
-	} else if (pos > tam){
+	} else if (pos >= tam){
 		eliminar_final();
 	} else {
 		for(int i = 1; i < pos; i++){

@@ -3,127 +3,65 @@
 
 using namespace std;
 
+struct estud{
+	string nombre;
+	long int codigo;
+	string carrera;
+};
+
 int main(int argc, char** argv) {
-	listad<int> lent;
-	//Lista<char> lchar;
-
-	nodo<int> *nuevo, *nuevo1, *nuevo2, *nuevo3, *nuevo4;
-	//nodo<char> *nchar, *nchar1, *nchar2, *nchar3, *nchar4;
+	int i;
+	listad<int> lint;
+	listad<float> lfloat;
+	listad<estud> lestud;
+	estud a;
 	
-	//Creo nuevos nodos para ser ingresados en la lista
-	nuevo = new nodo<int>;
-	nuevo -> dato = 9;
-	nuevo -> sig = NULL;
-	nuevo -> ant = NULL;
+	a.nombre = "Pedro";
+	a.codigo = 2018004;
+	a.carrera = "Sistemas";
 	
-	nuevo1 = new nodo<int>;
-	nuevo1 -> dato = 8;
-	nuevo1 -> sig = NULL;
-	nuevo1 -> ant = NULL;
+	lestud.insertar_pos(a, 1);
 	
-	nuevo2 = new nodo<int>;
-	nuevo2 -> dato = 20;
-	nuevo2 -> sig = NULL;
-	nuevo2 -> ant = NULL;
+	a.nombre = "Luis";
+	a.codigo = 2018040;
+	a.carrera = "Electronica";
 	
-	nuevo3 = new nodo<int>;
-	nuevo3 -> dato = 12;
-	nuevo3 -> sig = NULL;
-	nuevo3 -> ant = NULL;
+	lestud.insertar_inicio(a);
 	
-	nuevo4 = new nodo<int>;
-	nuevo4 -> dato = 1;
-	nuevo4 -> sig = NULL;
-	nuevo4 -> ant = NULL;
+	a.nombre = "Marta";
+	a.codigo = 2018043;
+	a.carrera = "Industrial";
+	
+	lestud.insertar_final(a);
+	
+	i = 1;
+	while(i <= lestud.tam_lista()){
+		a = lestud.consultar(i);
+		cout<<a.nombre<<" ";
+		i++;
+	}
+	
 	/*
-	nchar = new nodo<char>;
-	nchar -> dato = '*';
-	nchar -> sig = NULL;
-	nchar -> ant = NULL;
+	lint.insertar_final(3);
+	lint.insertar_inicio(8);
+	lint.insertar_pos(10, 2);
+
+	lfloat.insertar_inicio(3.5);
+	lfloat.insertar_final(8.2);
+	lfloat.insertar_pos(3.8, 2);	
 	
-	nchar1 = new nodo<char>;
-	nchar1 -> dato = '/';
-	nchar1 -> sig = NULL;
-	nchar1 -> ant = NULL;
+	i = 1;
+	while(!lint.lista_vacia()){
+		cout<<lint.eliminar_pos(i)<<" ";
+		i++;
+	}
 	
-	nchar2 = new nodo<char>;
-	nchar2 -> dato = '@';
-	nchar2 -> sig = NULL;
-	nchar2 -> ant = NULL;
-	
-	nchar3 = new nodo<char>;
-	nchar3 -> dato = ':';
-	nchar3 -> sig = NULL;
-	nchar3 -> ant = NULL;
-	
-	nchar4 = new nodo<char>;
-	nchar4 -> dato = '?';
-	nchar4 -> sig = NULL;
-	nchar4 -> ant = NULL;
+	cout<<endl;
+	i = 1;
+	while(!lfloat.lista_vacia()){
+		cout<<lfloat.eliminar_pos(i)<<" ";
+		i++;
+	}
 	*/
-
-	//insertar al inicio de la lista
-	lent.insertar_inicio(nuevo);
-	lent.insertar_final(nuevo1);
-	lent.insertar_final(nuevo2);
-	lent.insertar_pos(nuevo3, 2);
-	lent.insertar_inicio(nuevo4);
 	
-	cout<<"Tamaño lista : "<<lent.tam_lista()<<endl;
-
-	for (int i = 1; i <= lent.tam_lista(); i++){
-		cout<<lent.consultar(i)<<endl;
-	}
-	
-	cout<<" ¿Lista vacia? "<<lent.lista_vacia()<<endl;
-	
-	lent.eliminar_pos(3);
-	
-	cout<<"Tamaño lista : "<<lent.tam_lista()<<endl;
-	
-	for (int i = 1; i <= lent.tam_lista(); i++){
-		cout<<lent.consultar(i)<<endl;
-	}
-	
-	cout<<" ¿Lista vacia? "<<lent.lista_vacia()<<endl;
-
-	lent.eliminar_inicio();
-
-	cout<<"Tamaño lista : "<<lent.tam_lista()<<endl;
-	
-	for (int i = 1; i <= lent.tam_lista(); i++){
-		cout<<lent.consultar(i)<<endl;
-	}
-	
-	cout<<" ¿Lista vacia? "<<lent.lista_vacia()<<endl;
-	
-	lent.eliminar_final();
-	
-	cout<<"Tamaño lista : "<<lent.tam_lista()<<endl;
-	
-	for (int i = 1; i <= lent.tam_lista(); i++){
-		cout<<lent.consultar(i)<<endl;
-	}
-	
-	cout<<" ¿Lista vacia? "<<lent.lista_vacia()<<endl;
-	
-	lent.eliminar_pos(2);
-	
-	cout<<"Tamaño lista : "<<lent.tam_lista()<<endl;
-	
-	for (int i = 1; i <= lent.tam_lista(); i++){
-		cout<<lent.consultar(i)<<endl;
-	}
-	
-	cout<<" ¿Lista vacia? "<<lent.lista_vacia()<<endl;
-	
-	lent.eliminar_pos(2);
-	
-	cout<<"Tamaño lista : "<<lent.tam_lista()<<endl;
-	
-	for (int i = 1; i <= lent.tam_lista(); i++){
-		cout<<lent.consultar(i)<<endl;
-	}
-	
-	cout<<" ¿Lista vacia? "<<lent.lista_vacia()<<endl;
 }
