@@ -5,17 +5,15 @@ using namespace std;
 
 int main() {
     listae<int> lint;
-    lint.insertar_dato(100);
-    lint.insertar_dato(102);
-    lint.insertar_dato(15);
-    cout<< "tamaño0 : "<<lint.tam_lista()<<endl;
-    lint.insertar_dato(11);
     lint.insertar_dato(3);
     lint.insertar_dato(9);
     lint.insertar_dato(4);
     lint.insertar_dato(1);
     lint.insertar_dato(0);
     lint.insertar_dato(20);
+    cout<< "tamaño0 : "<<lint.tam_lista()<<endl;
+    lint.insertar_dato(11);
+    
     cout<< "tamaño1 : "<<lint.tam_lista()<<endl;
     lint.insertar_dato(12);
     lint.insertar_dato(2);

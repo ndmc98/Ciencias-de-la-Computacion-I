@@ -1,9 +1,11 @@
 #ifndef listaenteros
 #define listaenteros
 
+#define NULL __null
+
 template <class T>
 struct nodo{
-    int dato;
+    T dato;
     nodo<T> *sig;
 };
 template <class T>
@@ -16,11 +18,11 @@ class listae{
             cabeza=NULL;
         }
         void insertar_dato(int info);
-        int consultar2(int pos);
-        int tam_lista();
-
-    private:
-        void organizar(int a[]);
+        T consultar2(int pos);
+        T tam_lista();
+        T consultar3(int pos);
+        void organizar();
+        void arreglo();
 };
 
 template <class T>
@@ -32,41 +34,55 @@ void listae <T>::insertar_dato(int info){
         cabeza -> sig = NULL;
         tam++;
     }else{
-        nodo <T> *aux,*aux2;
+        nodo <T> *aux;
         aux = cabeza;
         while(aux -> sig){
             aux = aux -> sig;
         }
         aux -> sig = nuevo;
         tam++;
-        a[tam];
-        aux = cabeza;
-        int i=0;
-        while(aux -> sig){
-            a[i]=aux->dato;
-            aux = aux -> sig;
-            i++;
-        }
-        //organizar(a);
-        
     }
+    arreglo();
 }
 template <class T>
-void listae <T>::organizar(int a[]){
-    int i,j,temp;
-    for(i=1;i<tam;i++){
-      temp = a[i];
-      j=i-1;
-      while ((a[j] > temp) && (j>=0)) {
-        a[j+1] = a[j];
-        j--;
+void listae <T>::arreglo(){
+    a[tam];
+    nodo<T> *nuevo = new nodo<T>;
+    nuevo = cabeza;
+    int i=0;
+    while(i<tam){
+        a[i] = nuevo -> dato;
+        nuevo = nuevo -> sig;
+        i++;
+    }
+    organizar();
+}
+template <class T>
+void listae <T>::organizar(){
+    int ints, i, aux;
+    bool band;
+    ints = tam;
+    while (ints > 1 ) {
+      ints = (ints/2);
+      band = true;
+      while (band==true) {
+        band=false;
+        i=0;
+        while ((i+ints)<=tam) {
+          if (a[i]>a[i+ints]) {
+            aux=a[i];
+            a[i]=a[i+ints];
+            a[i+ints]=aux;
+            band=true;
+          }
+          i++;
+        }
       }
-      a[j+1] = temp;
     }
 }
 
 template <class T>
-int listae <T>::consultar2(int pos){
+T listae <T>::consultar2(int pos){
 	int i = 0;
 	nodo<T> *aux;
 	aux = cabeza;
@@ -79,8 +95,12 @@ int listae <T>::consultar2(int pos){
 	}
 }
 template <class T>
-int listae <T>::tam_lista(){
+T listae <T>::tam_lista(){
 	return tam;
+}
+template <class T>
+T listae <T>::consultar3(int pos){
+    return a[pos];
 }
 
 #endif
