@@ -19,6 +19,7 @@ class multi{
 	private:
 		int organizar(std::string dato,int d);
 		int organizar_int(int dato);
+		void recorrer();
 };
 //DEFINICION METODOS
 void multi::insertar_estu(std::string nombre,std::string carrera,std::string hobby,int edad){
@@ -26,6 +27,15 @@ void multi::insertar_estu(std::string nombre,std::string carrera,std::string hob
 	nuevo -> carrera=carrera;
 	nuevo -> hobby=hobby;
 	nuevo -> edad=edad;
+	std::list<estudiante>::iterator aux;
+	estudiante es[datos.size()];
+	int i=0;
+	aux=datos.begin();
+	while(aux != datos.end()){
+		es[i] = *aux;
+		i++;
+		aux++;
+	}
 	datos.push_back(*nuevo);
 	if(datos.empty()){
 		nuevo -> signombre=0;
@@ -33,10 +43,27 @@ void multi::insertar_estu(std::string nombre,std::string carrera,std::string hob
 		nuevo -> sighobby=0;
 		nuevo -> sigedad=0;
 	}else{
+		es[i].sigcarrera = datos.size();
 		nuevo -> signombre=organizar(nuevo -> nombre,0);
-		nuevo -> sigcarrera=organizar(nuevo -> carrera,1);
-		nuevo -> sighobby=organizar(nuevo -> hobby,2);
+		nuevo -> sigcarrera=NULL;
+		nuevo -> sighobby=organizar(nuevo -> hobby,1);
 		nuevo -> sigedad=organizar_int(nuevo -> edad);
+	}
+}
+void multi::recorrer(){
+	std::list<estudiante>::iterator aux;
+	estudiante es[datos.size()];
+	int i=0;
+	aux=datos.begin();
+	while(aux != datos.end()){
+		es[i] = *aux;
+		i++;
+		aux++;
+	}
+	for(int i=0;i<datos.size()-1;i++){
+		if(es[i].signombre==nuevo -> signombre&& nuevo -> signombre!=datos.size()&&nuevo -> signombre!=0){
+			es[i-1].signombre=datos.size();
+		}
 	}
 }
 int multi::organizar(std::string dato,int d){
@@ -51,13 +78,6 @@ int multi::organizar(std::string dato,int d){
 			aux++;
 		}
 	}else if(d==1){
-		aux=datos.begin();
-		while(aux != datos.end()){
-			es[i] = aux -> carrera;
-			i++;
-			aux++;
-		}
-	}else if(d==2){
 		aux=datos.begin();
 		while(aux != datos.end()){
 			es[i] = aux -> hobby;
