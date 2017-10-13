@@ -42,8 +42,15 @@ class multi{
 		int encontrarAnteriorHobby(Cabecera cab, int i);
 		void insertarEstudiante(string name, string career, int age, string hobb, int i);
 		void imprimir();
-		void imprimirNombre();
+		void imprimirNombreAZ();
+		void imprimirNombreZA();
 		void imprimirEdad();
+		void imprimirEdadDes();
+		void imprimirCarrera(string car);
+		void imprimirhobby(string hob);
+		void imprimirEstuandCar();
+		void imprimirEstuandHob();
+		void imprimirCarandHob(string car);
 };
 
 int multi::buscarPorEdad(Cabecera cab, int age){
@@ -77,7 +84,6 @@ int multi::buscarPorEdad(Cabecera cab, int age){
 		}
 	}	
 }
-
 int multi::buscarPorNombre(Cabecera cab, string name){
 	Cabecera aux, aux1;
 	aux = aux1 = cab;	
@@ -108,7 +114,6 @@ int multi::buscarPorNombre(Cabecera cab, string name){
 		}
 	}	
 }
-
 int multi::encontrarAnteriorCarrera(Cabecera cab, int i){
 	int aux = cab.pos;
 	if (cab.pos == 0){		
@@ -126,7 +131,6 @@ int multi::encontrarAnteriorCarrera(Cabecera cab, int i){
 		}
 	}	
 }
-
 int multi::encontrarAnteriorHobby(Cabecera cab, int i){
 	int aux = cab.pos;
 	if (cab.pos == 0){		
@@ -144,7 +148,6 @@ int multi::encontrarAnteriorHobby(Cabecera cab, int i){
 		}
 	}
 }
-
 void multi::insertarEstudiante(string name, string career, int age, string hobb, int i){
 	Estudiante nuevo;
 	int anteriorNombre, anteriorEdad;	
@@ -258,8 +261,7 @@ void multi::insertarEstudiante(string name, string career, int age, string hobb,
 	}
 	stu[i] = nuevo;	
 }
-
-void multi::imprimirNombre(){
+void multi::imprimirNombreAZ(){
 	int a = cab[0].pos;
 	for(int i=1;i<11;i++){
 		cout<<stu[a].nombre<<endl;
@@ -267,7 +269,21 @@ void multi::imprimirNombre(){
 	}
 	cout<<endl;	
 }
-
+void multi::imprimirNombreZA(){
+	string nom[11];
+	int temp=10;
+	int a = cab[0].pos;
+	for(int i=1;i<11;i++){
+		//cout<<stu[a].nombre<<endl;
+		nom[temp]=stu[a].nombre;
+		a = stu[a].signombre;
+		temp--;
+	}
+	for(int i=1;i<11;i++){
+		cout<<nom[i]<<endl;
+	}
+	cout<<endl;	
+}
 void multi::imprimirEdad(){
 	int b = cab[5].pos;
 	for(int i=1;i<11;i++){
@@ -276,7 +292,20 @@ void multi::imprimirEdad(){
 	}	
 	cout<<endl;
 }
-
+void multi::imprimirEdadDes(){
+	int ed[11];
+	int temp=10;
+	int b = cab[5].pos;
+	for(int i=1;i<11;i++){
+		ed[temp]= stu[b].edad;
+		b = stu[b].sigedad;
+		temp--;
+	}
+	for(int i=1;i<11;i++){
+		cout<<ed[i]<<endl;
+	}	
+	cout<<endl;
+}
 void multi::imprimir(){
 	for(int j=1; j<11; j++){
 		cout<<j<<" "<<stu[j].nombre<<" "<<stu[j].carrera<<" "<<stu[j].edad<<" "<<stu[j].hobby<<endl;
@@ -289,7 +318,93 @@ void multi::imprimir(){
 	}
 	cout<<endl;
 }
-
+void multi::imprimirCarrera(string car){
+	int b=0;
+	if(car=="Electronica"){
+		b = cab[1].pos;
+	}else if(car=="Industrial"){
+		b = cab[2].pos;
+	}else if(car=="Sistemas"){
+		b = cab[3].pos;
+	}else if(car=="Catastral"){
+		b = cab[4].pos;
+	}
+	for(int i=1;i<11;i++){
+		cout<<stu[b].nombre<<endl;
+		b = stu[b].sigcarrera;
+	}	
+	cout<<endl;
+}
+void multi::imprimirhobby(string car){
+	int b;
+	if(car=="Danza"){
+		b=cab[6].pos;
+	}else if(car=="Natacion"){
+		b=cab[7].pos;
+	}else if(car=="Basket"){
+		b=cab[8].pos;
+	}else if(car=="Beisbol"){
+		b=cab[9].pos;
+	}
+	for(int i=1;i<11;i++){
+		cout<<stu[b].nombre<<endl;
+		b = stu[b].sighobby;
+	}	
+	cout<<endl;
+}
+void multi::imprimirEstuandCar(){
+	int a = cab[0].pos;
+	cout<<"Nombre    "<<"Carrera    "<<endl;
+	for(int i=1;i<11;i++){
+		cout<<stu[a].nombre<<"    "<<stu[a].carrera<<endl;
+		a = stu[a].signombre;
+	}
+	cout<<endl;
+}
+void multi::imprimirEstuandHob(){
+	int a = cab[0].pos;
+	cout<<"Nombre    "<<"Hobby    "<<endl;
+	for(int i=1;i<11;i++){
+		cout<<stu[a].nombre<<"    "<<stu[a].hobby<<endl;
+		a = stu[a].signombre;
+	}
+	cout<<endl;
+}
+void multi::imprimirCarandHob(string car){
+	int b=0;
+	int nat=0,dan=0,bas=0,bei=0;
+	if(car=="Electronica"){
+		b = cab[1].pos;
+	}else if(car=="Industrial"){
+		b = cab[2].pos;
+	}else if(car=="Sistemas"){
+		b = cab[3].pos;
+	}else if(car=="Catastral"){
+		b = cab[4].pos;
+	}
+	for(int i=1;i<11;i++){
+		if(stu[b].hobby=="Natacion"&&nat==0){
+			cout<<stu[b].hobby<<endl;
+			b = stu[b].signombre;
+			nat=1;
+		}else if(stu[b].hobby=="Danza"&&dan==0){
+			cout<<stu[b].hobby<<endl;
+			b = stu[b].signombre;
+			dan=1;
+		}else if(stu[b].hobby=="Basket"&&bas==0){
+			cout<<stu[b].hobby<<endl;
+			b = stu[b].signombre;
+			bas=1;
+		}else if(stu[b].hobby=="Beisbol"&&bei==0){
+			cout<<stu[b].hobby<<endl;
+			b = stu[b].signombre;
+			bei=1;
+		}else{
+			b = stu[b].signombre;
+		}
+	}
+	cout<<endl;
+}
 #endif
 
 
