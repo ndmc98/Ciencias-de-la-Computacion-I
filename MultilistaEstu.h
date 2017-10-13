@@ -36,7 +36,7 @@ void multi::insertar_estu(std::string nombre,std::string carrera,std::string hob
 		nuevo -> signombre=organizar(nuevo -> nombre,0);
 		nuevo -> sigcarrera=organizar(nuevo -> carrera,1);
 		nuevo -> sighobby=organizar(nuevo -> hobby,2);
-		nuevo -> sigedad=0;
+		nuevo -> sigedad=organizar_int(nuevo -> edad);
 	}
 }
 int multi::organizar(std::string dato,int d){
@@ -72,6 +72,19 @@ int multi::organizar(std::string dato,int d){
 	return pos;
 }
 int multi::organizar_int(int dato){
-	
+	std::list<estudiante>::iterator aux;
+	aux=datos.begin();
+	int es[datos.size()];
+	int i=0;
+	while(aux != datos.end()){
+		es[i] = aux -> edad;
+		i++;
+		aux++;
+	}
+	int pos=0;
+	while(dato>es[pos]){
+		pos++;
+	}
+	return pos;
 } 
 #endif
