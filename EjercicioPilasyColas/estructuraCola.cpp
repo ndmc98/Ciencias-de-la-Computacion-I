@@ -20,17 +20,17 @@ char x;
  i=1;
  x=0;
  cout<<x;
- while(i<=tam && i<255)
-  { if((x==0)||(x==13)||(x==32)||(x>6&&x<11))
+ while(i<=tam && i<255){
+    if((x==0)||(x==13)||(x==32)||(x>6&&x<11))
         x++;
-     else 
-       {Cola.InsCola(x);
+     else {
+        Cola.InsCola(x);
         i++; x++;
        }
-  }
+    }
  cout<<"mire cuidadosamente los sìmbolos y elija uno\n";
 
-for(j=1; j<tam/3; j++){
+    for(j=1; j<tam/3; j++){
     cout<<"  Gr1  "<<"Gr2  "<<"Gr3  "<<endl;
     while (!Cola.ColaVacia()){
         for (i=0; i<3; i++){
@@ -70,7 +70,7 @@ for(j=1; j<tam/3; j++){
     }
   }
 
-j=tam-tam/2;
+    j=tam-tam/2;
 
 for (i=1; i<=j; i++)
    {x=Cola.AtenderCola();}

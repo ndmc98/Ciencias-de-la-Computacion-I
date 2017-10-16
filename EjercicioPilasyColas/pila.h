@@ -1,10 +1,10 @@
 #ifndef PILA1_H     
 #define PILA1_H    
 #include "estructura.h"
+#define NULL __null
 
-
-
-class pila{nodo *cab;
+class pila{
+      nodo *cab;
       public: pila(){cab= new nodo;
                      cab->dato=' ';
                      cab->sig=NULL;}
@@ -42,6 +42,4 @@ bool pila::PilaVacia(){
            delete cab;
            }
      }
-
-     
 #endif
