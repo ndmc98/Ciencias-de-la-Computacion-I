@@ -14,7 +14,7 @@ int i,j, tam, grupo=0, orden[3];
 char x; 
   
  do{
-   cout<<"Escriba un mÃ¹ltiplo de 3: ";
+   cout<<"Escriba un mùltiplo de 3: ";
    cin>> tam;}
  while (tam%3!=0);
  i=1;
@@ -28,7 +28,7 @@ char x;
         i++; x++;
        }
     }
- cout<<"mire cuidadosamente los sÃ¬mbolos y elija uno\n";
+ cout<<"mire cuidadosamente los sìmbolos y elija uno\n";
 
     for(j=1; j<tam/3; j++){
     cout<<"  Gr1  "<<"Gr2  "<<"Gr3  "<<endl;
@@ -41,7 +41,7 @@ char x;
     cout<<"UlTIMO VALOR"<<x<<"\n"; 
     }
  
-   cout<< "elija el grupo en el que quedÃ² el sÃ¬mbolo elegido (1, 2 o 3): ";
+   cout<< "elija el grupo en el que quedò el sìmbolo elegido (1, 2 o 3): ";
   cin>> grupo;
   switch(grupo){
          case 1 : {

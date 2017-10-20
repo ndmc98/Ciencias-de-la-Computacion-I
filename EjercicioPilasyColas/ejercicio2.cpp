@@ -22,7 +22,8 @@ void quicksort(int a[],int izq, int der){
 		quicksort(a, izq, i-1);
 		quicksort(a, i+1, der);
     }
-}    
+}
+    
 int main(){
     pilaT<int> a;
     pilaT<int> b;
@@ -31,16 +32,19 @@ int main(){
     int *br;
     int tama;
     int tamb;
-    int cont=0;
-    int i=0;
+    int cont = 0;
+    int i = 0;
+    
     a.Push(1);
     a.Push(5);
     a.Push(6);
     a.Push(7);
+    
     b.Push(10);
     b.Push(9);
     b.Push(3);
     b.Push(2);
+    
     while(!a.PilaVaciaT()){
         c.Push(a.Pop());
         cont++;
@@ -48,14 +52,14 @@ int main(){
     ar = new int[cont];
     while(!c.PilaVaciaT()){
         int temp = c.Pop();
-        ar[i]=temp;
+        ar[i] = temp;
         cout << "c : "<< temp<<endl;
         a.Push(temp);
         i++;
     }
-    tama= cont;
+    tama = cont;
     cont = 0;
-    i=0;
+    i = 0;
     while(!b.PilaVaciaT()){
         c.Push(b.Pop());
         cont++;
@@ -63,17 +67,17 @@ int main(){
     br = new int[cont];
     while(!c.PilaVaciaT()){
         int temp = c.Pop();
-        br[i]=temp;
+        br[i] = temp;
         cout << "c : "<< temp<<endl;
         b.Push(temp);
         i++;
     }
     tamb = cont;
-    int total=tama+tamb;
+    int total = tama+tamb;
     int totalar[total];
     for(int i=0;i<tama;i++){
-        totalar[i]=ar[i];
-        totalar[i+tama]=br[i];
+        totalar[i] = ar[i];
+        totalar[i+tama] = br[i];
     }
     quicksort(totalar, 0, total-1);
     for(int i=0;i<total;i++){

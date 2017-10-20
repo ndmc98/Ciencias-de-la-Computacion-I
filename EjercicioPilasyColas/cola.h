@@ -1,30 +1,27 @@
 #include <cstdlib>
 #include <iostream>
-#include "EstructuraTemplate.h"
+#include "estructura.h"
 
-#ifndef COLATEMPLATE     
-#define COLATEMPLATE 
+#ifndef COLA1_H     
+#define COLA1_H 
 
 using namespace std;
 
-template <class T>
 class cola{
-    nodo<T> *cab, *fin;
+	nodo *cab, *fin;
     public: cola(){
 		cab=fin=NULL;
 	}
-    
-	void InsCola(T i);
-    T AtenderCola();
+	void InsCola(char i);
+	char AtenderCola();
     void ImprimirCola();
     bool ColaVacia();
     ~cola();
 };
 
-template <class T>
-void cola<T>::InsCola(T i){
-    nodo<T> *nuevo;
-    nuevo = new nodo<T>;
+void cola::InsCola(char i){
+    nodo *nuevo;
+    nuevo = new nodo;
     nuevo->dato = i;
     nuevo->sig = NULL;
     if (cab == NULL){
@@ -35,20 +32,17 @@ void cola<T>::InsCola(T i){
     fin = nuevo;
 }
 
-template <class T>
-T cola<T>::AtenderCola(){   
-	T x;
-    nodo<T> *aux = cab; 
+char cola::AtenderCola(){
+	char x;
+    nodo *aux = cab; 
     cab = aux->sig;
     x = aux->dato;
     delete aux;
     return x;
 }
 
-//necesario cambiar este metodo
-template <class T>
-void cola<T>::ImprimirCola(){
-    nodo<T> *aux;
+void cola::ImprimirCola(){
+    nodo *aux;
     aux = cab;
     while(aux != NULL){
     	cout<<aux->dato<<" ";
@@ -56,14 +50,12 @@ void cola<T>::ImprimirCola(){
 	}    
 }
 
-template <class T>
-bool cola<T>::ColaVacia(){
-     return (cab == NULL);
+bool cola::ColaVacia(){
+    return (cab == NULL);
 }
 
-template <class T>
-cola<T>::~cola(){
-    nodo<T> *aux;
+cola::~cola(){
+    nodo *aux;
     while(cab != NULL){
 		aux = cab;
     	cab = aux->sig;
