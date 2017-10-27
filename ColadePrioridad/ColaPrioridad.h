@@ -1,8 +1,6 @@
-#include <cstdlib>
+#include <vector>
 #include <iostream>
-#include "estructuraCP.h"
-#include "colaTemplate.h"
-#include "pilaTemplate.h"
+#include <iterator>
 #ifndef colaPri
 #define colaPri
 
@@ -10,43 +8,98 @@ using namespace std;
 #define NULL __null
 
 template <class T>
-class colaPrioridad{
-    nodoAP<T> *raiz;
-public:
-    colaPrioridad(){
-        raiz = NULL;
-        raiz -> izq = NULL;
-        raiz -> der = NULL;
-    }
-    nodoAP<T> *reRaiz(){return raiz;};
-    void insertar(nodoAP<T> in);
-    T atender ();
+class BinaryHeap
+{
+    private:
+        vector <T> heap;
+        int left(int parent);
+        int right(int parent);
+        int parent(int child);
+        void heapifyup(int index);
+        void heapifydown(int index);
+    public:
+        BinaryHeap()
+        {}
+        void Insert(T element);
+        void DisplayHeap();
+        int Size();
 };
-
-template <class T>
-void colaPrioridad<T>::insertar(nodoAP<T> in){
-    pilaT<nodo<T> *ar> a;
-    nodoAP<T> *aux;
-    nodoAP<T> *aux2;
-    bool hd =false;
-    if(raiz == NULL){
-        raiz = in;
-    }else {
-        aux = raiz;
-        bool terniv=false;
-        while(aux!=NULL){
-            if(aux->izq == NULL){
-                aux -> izq = in;
-            }else if(aux-> der == NULL){
-                aux -> der = in;
-            }else{
-                nodoAP<T> niveles[2];
-                niveles[0]=aux -> izq;
-                niveles[1]=aux -> der;
-                a.Push(niveles);
-                aux = aux -> izq;
-            }
-        }
+template<class T>
+int BinaryHeap<T>::Size()
+{
+    return heap.size();
+}
+template<class T>
+void BinaryHeap<T>::Insert(T element)
+{
+    heap.push_back(element);
+    heapifyup(heap.size() -1);
+}
+template<class T>
+void BinaryHeap<T>::DisplayHeap()
+{
+    vector <int>::iterator pos = heap.begin();
+    while (pos != heap.end())
+    {
+        cout<<*pos<<" ";
+        pos++;
     }
+    cout<<endl;
+}
+template <class T>
+void BinaryHeap<T>::heapifyup(int in)
+{
+    if (in >= 0 && parent(in) >= 0 && heap[parent(in)] < heap[in])
+    {
+        int temp = heap[in];
+        heap[in] = heap[parent(in)];
+        heap[parent(in)] = temp;
+        heapifyup(parent(in));
+    }
+}
+template <class T>
+void BinaryHeap<T>::heapifydown(int in)
+{
+ 
+    int child = left(in);
+    int child1 = right(in);
+    if (child >= 0 && child1 >= 0 && heap[child] < heap[child1])
+    {
+       child = child1;
+    }
+    if (child > 0 && heap[in] > heap[child])
+    {
+        int temp = heap[in];
+        heap[in] = heap[child];
+        heap[child] = temp;
+        heapifydown(child);
+    }
+}
+template <class T>
+int BinaryHeap<T>::left(int parent)
+{
+    int l = 2 * parent + 1;
+    if (l < heap.size())
+        return l;
+    else
+        return -1;
+}
+template <class T>
+int BinaryHeap<T>::right(int parent)
+{
+    int r = 2 * parent + 2;
+    if (r < heap.size())
+        return r;
+    else
+        return -1;
+}
+template <class T>
+int BinaryHeap<T>::parent(int child)
+{
+    int p = (child - 1)/2;
+    if (child == 0)
+        return -1;
+    else
+        return p;
 }
 #endif
