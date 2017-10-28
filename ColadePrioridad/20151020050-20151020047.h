@@ -21,6 +21,7 @@ class BinaryHeap
         BinaryHeap()
         {}
         void Insert(T element);
+        void DeleteMin();
         void DisplayHeap();
         int Size();
 };
@@ -101,5 +102,19 @@ int BinaryHeap<T>::parent(int child)
         return -1;
     else
         return p;
+}
+template <class T>
+void BinaryHeap<T>::DeleteMin()
+{
+    if (heap.size() == 0)
+    {
+        cout<<"Heap is Empty"<<endl;
+        return;
+    }
+    heap[0] = heap.at(heap.size() - 1);
+    heap.pop_back();
+    //heapifydown(0);
+    heapifyup(0);
+    cout<<"Element Deleted"<<endl;
 }
 #endif
